@@ -27,6 +27,7 @@ Replace or upgrade these internal networks inside buildings:
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/change-internal-roads.1928048/" />
 	<!--External link, can be set multiple times-->
 	<ExternalLink Type="github" Url="https://github.com/nicokatsu/CS2-ChangeInternalRoads" />
+	<ExternalLink Type="discord" Url="https://discord.com/channels/1024242828114673724/1514872983062184087/1514872983062184087" />
 	<!--Tag, can be set multiple times-->
 	<Tag Value="Code Mod" />
 	<!--Version of the mod-->
