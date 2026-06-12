@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using ChangeInternalRoads.Systems;
 using Colossal.Logging;
 using Game;
@@ -19,7 +20,7 @@ namespace ChangeInternalRoads
 
             if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset))
             {
-                LogInfo($"Current mod asset at {asset.path}");
+                LogDebugInfo($"Current mod asset at {asset.path}");
             }
 
             updateSystem.UpdateAt<InternalRoadNativeToolPatchSystem>(SystemUpdatePhase.ToolUpdate);
@@ -28,7 +29,7 @@ namespace ChangeInternalRoads
 
         public void OnDispose()
         {
-            LogInfo(nameof(OnDispose));
+            LogDebugInfo(nameof(OnDispose));
         }
 
         internal static void LogInfo(string message)
@@ -37,6 +38,18 @@ namespace ChangeInternalRoads
         }
 
         internal static void LogException(Exception exception, string message)
+        {
+            log.Info(exception, $"[ERROR] {message}");
+        }
+
+        [Conditional("DEBUG")]
+        internal static void LogDebugInfo(string message)
+        {
+            log.Info(message);
+        }
+
+        [Conditional("DEBUG")]
+        internal static void LogDebugException(Exception exception, string message)
         {
             log.Info(exception, $"[ERROR] {message}");
         }

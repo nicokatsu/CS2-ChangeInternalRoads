@@ -32,12 +32,12 @@ Replace or upgrade these internal networks inside buildings:
 	<!--Tag, can be set multiple times-->
 	<Tag Value="Code Mod" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.0.0" />
+	<ModVersion Value="1.0.1" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.5.*" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<ChangeLog>
-Initial release.
+Reduced log output.
 	</ChangeLog>
 	<!--Supported values Public, Private, Unlisted-->
 	<AccessLevel Value="Public" />

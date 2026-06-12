@@ -33,7 +33,7 @@ namespace ChangeInternalRoads.Systems
 
         protected override void OnDestroy()
         {
-            Mod.LogInfo("[UI] Destroying options UI system.");
+            Mod.LogDebugInfo("[UI] Destroying options UI system.");
             base.OnDestroy();
         }
 

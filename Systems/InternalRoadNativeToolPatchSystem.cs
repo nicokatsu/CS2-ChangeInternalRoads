@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Emit;
 using ChangeInternalRoads.Diagnostics;
@@ -191,7 +192,7 @@ namespace ChangeInternalRoads.Systems
                 try
                 {
                     harmony.UnpatchAll(HarmonyId);
-                    Mod.LogInfo("[NativeTool] Harmony patches uninstalled.");
+                    Mod.LogDebugInfo("[NativeTool] Harmony patches uninstalled.");
                 }
                 catch (Exception ex)
                 {
@@ -272,7 +273,8 @@ namespace ChangeInternalRoads.Systems
 
                 __result = new ControlPoint(candidate, hit);
                 RegisterAllowedEdge(authorization);
-                Mod.LogInfo($"[NativeTool] Allowed internal edge for vanilla replace sourceEdge={DiagnosticFormat.Entity(candidate)} owner={DiagnosticFormat.Entity(authorization.Owner)} ownerPrefab={authorization.OwnerPrefabName} subnetIndex={authorization.SubnetIndex} sourcePrefab={authorization.SourcePrefabName} targetPrefab={authorization.TargetPrefabName} targetIsUpgrade={authorization.TargetIsUpgrade} sourceProfile=\"{authorization.SourceProfile}\" targetProfile=\"{authorization.TargetProfile}\".");
+                Mod.LogInfo($"[NativeTool] Authorized internal edge ownerPrefab={authorization.OwnerPrefabName} subnetIndex={authorization.SubnetIndex} sourcePrefab={authorization.SourcePrefabName} targetPrefab={authorization.TargetPrefabName} targetIsUpgrade={authorization.TargetIsUpgrade}.");
+                Mod.LogDebugInfo($"[NativeTool] Allowed internal edge for vanilla replace sourceEdge={DiagnosticFormat.Entity(candidate)} owner={DiagnosticFormat.Entity(authorization.Owner)} ownerPrefab={authorization.OwnerPrefabName} subnetIndex={authorization.SubnetIndex} sourcePrefab={authorization.SourcePrefabName} targetPrefab={authorization.TargetPrefabName} targetIsUpgrade={authorization.TargetIsUpgrade} sourceProfile=\"{authorization.SourceProfile}\" targetProfile=\"{authorization.TargetProfile}\".");
             }
             catch (Exception ex)
             {
@@ -346,6 +348,7 @@ namespace ChangeInternalRoads.Systems
             }
         }
 
+        [Conditional("DEBUG")]
         private void LogRaycastPatch(NetPrefab targetPrefab, RaycastFlags oldFlags, RaycastFlags newFlags)
         {
             string key = $"{targetPrefab.name}|{oldFlags}|{newFlags}";
@@ -355,7 +358,7 @@ namespace ChangeInternalRoads.Systems
             }
 
             lastRaycastLogKey = key;
-            Mod.LogInfo($"[NativeTool] Replace raycast patched targetPrefab={targetPrefab.name} oldFlags={oldFlags} newFlags={newFlags} note=\"IgnoreSecondary removed for internal subnet picking; vanilla owner highlighting is left untouched.\"");
+            Mod.LogDebugInfo($"[NativeTool] Replace raycast patched targetPrefab={targetPrefab.name} oldFlags={oldFlags} newFlags={newFlags} note=\"IgnoreSecondary removed for internal subnet picking; vanilla owner highlighting is left untouched.\"");
         }
 
         private Entity GetBestCandidateEdge(Entity entity, RaycastHit hit)
@@ -504,6 +507,7 @@ namespace ChangeInternalRoads.Systems
             return false;
         }
 
+        [Conditional("DEBUG")]
         private void LogSkipOnce(string key, string message)
         {
             int frame = UnityEngine.Time.frameCount;
@@ -513,9 +517,10 @@ namespace ChangeInternalRoads.Systems
             }
 
             skipLogFrames[key] = frame;
-            Mod.LogInfo(message);
+            Mod.LogDebugInfo(message);
         }
 
+        [Conditional("DEBUG")]
         private void LogDisabledSkipOnce(string source)
         {
             LogSkipOnce(
@@ -539,7 +544,7 @@ namespace ChangeInternalRoads.Systems
             bool wasEnabled = internalRoadsEnabled;
             internalRoadsEnabled = false;
             ClearRuntimeState(targetInstance);
-            Mod.LogInfo($"[NativeTool] Runtime state reset reason={reason} wasEnabled={wasEnabled}.");
+            Mod.LogDebugInfo($"[NativeTool] Runtime state reset reason={reason} wasEnabled={wasEnabled}.");
         }
 
         private static void RegisterAllowedEdge(AllowedInternalEdge allowed)
@@ -588,7 +593,7 @@ namespace ChangeInternalRoads.Systems
             }
 
             QueueVerification(best);
-            Mod.LogInfo($"[NativeTool.Verify] queued owner={DiagnosticFormat.Entity(best.Owner)} ownerPrefab={best.OwnerPrefabName} subnetIndex={best.SubnetIndex} sourceEdge={DiagnosticFormat.Entity(best.Edge)} targetPrefab={best.TargetPrefabName} targetIsUpgrade={best.TargetIsUpgrade}.");
+            Mod.LogDebugInfo($"[NativeTool.Verify] queued owner={DiagnosticFormat.Entity(best.Owner)} ownerPrefab={best.OwnerPrefabName} subnetIndex={best.SubnetIndex} sourceEdge={DiagnosticFormat.Entity(best.Edge)} targetPrefab={best.TargetPrefabName} targetIsUpgrade={best.TargetIsUpgrade}.");
         }
 
         private void ProcessPendingVerification()
@@ -601,7 +606,8 @@ namespace ChangeInternalRoads.Systems
                 string mismatch = GetVerificationMismatch(pending.Allowed);
                 if (mismatch == null)
                 {
-                    Mod.LogInfo($"[NativeTool.Verify] matched owner={DiagnosticFormat.Entity(pending.Allowed.Owner)} ownerPrefab={pending.Allowed.OwnerPrefabName} subnetIndex={pending.Allowed.SubnetIndex} targetPrefab={pending.Allowed.TargetPrefabName} targetIsUpgrade={pending.Allowed.TargetIsUpgrade} attempts={pending.Attempts}.");
+                    Mod.LogInfo($"[NativeTool.Verify] matched ownerPrefab={pending.Allowed.OwnerPrefabName} subnetIndex={pending.Allowed.SubnetIndex} targetPrefab={pending.Allowed.TargetPrefabName} targetIsUpgrade={pending.Allowed.TargetIsUpgrade} attempts={pending.Attempts}.");
+                    Mod.LogDebugInfo($"[NativeTool.Verify] matched owner={DiagnosticFormat.Entity(pending.Allowed.Owner)} ownerPrefab={pending.Allowed.OwnerPrefabName} subnetIndex={pending.Allowed.SubnetIndex} targetPrefab={pending.Allowed.TargetPrefabName} targetIsUpgrade={pending.Allowed.TargetIsUpgrade} attempts={pending.Attempts}.");
                     pendingVerifications.RemoveAt(i);
                     continue;
                 }
