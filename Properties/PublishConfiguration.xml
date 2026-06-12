@@ -16,6 +16,7 @@ Replace or upgrade these internal networks inside buildings:
 ## Notes
 - Use the **Internal Roads** toggle to enable this feature.
 - Not supported yet: invisible roads.
+- Uses the game's native Replace/Upgrade rules; invalid swaps, such as rail track to subway track, remain blocked.
 - Buildings with upgrades may conflict with edited internal networks; use with Anarchy if placement is blocked.
 	</LongDescription>
 	<!--Thumbnail-->
