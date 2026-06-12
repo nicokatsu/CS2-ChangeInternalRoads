@@ -1,6 +1,6 @@
 <Publish>
 	<!--Id must be set in order to update existed mod. it is not required for publishing mod for the first time-->
-	<ModId Value="" />
+	<ModId Value="147332" />
 	<!--Name of the mod to display to players-->
 	<DisplayName Value="Change Internal Roads" />
 	<!--Short description of the mod-->
@@ -20,9 +20,9 @@ Replace or upgrade these internal networks inside buildings:
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
-	<Screenshot Value="Properties/Screenshots/01-road.png" />
-	<Screenshot Value="Properties/Screenshots/02-bus-upgrade.png" />
-	<Screenshot Value="Properties/Screenshots/03-rail.png" />
+	<Screenshot Value="Properties/Screenshots/01-road.jpg" />
+	<Screenshot Value="Properties/Screenshots/02-bus-upgrade.jpg" />
+	<Screenshot Value="Properties/Screenshots/03-rail.jpg" />
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/change-internal-roads.1928048/" />
 	<!--External link, can be set multiple times-->
