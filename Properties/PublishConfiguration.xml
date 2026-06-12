@@ -14,6 +14,7 @@ Replace or upgrade these internal networks inside buildings:
 - Rail tracks
 
 ## Notes
+- Use the **Internal Roads** toggle to enable this feature.
 - Not supported yet: invisible roads.
 - Buildings with upgrades may conflict with edited internal networks; use with Anarchy if placement is blocked.
 	</LongDescription>
