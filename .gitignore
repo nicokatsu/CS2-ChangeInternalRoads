@@ -1,0 +1,27 @@
+# Build output
+bin/
+obj/
+Library/
+UI/node_modules/
+UI/build/
+
+# Local agent notes
+AGENTS.md
+
+# IDE/editor state
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.pid
+
+# OS metadata
+Thumbs.db
+Desktop.ini
